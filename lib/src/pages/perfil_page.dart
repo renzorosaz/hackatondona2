@@ -21,6 +21,7 @@ class PerfilPage extends StatelessWidget {
               children: <Widget>[
                 _infoPerfil(),
                 _infoCoins(context),
+                _botonDonar(context),
                 _infoMedallas(context) 
               ],
             ),
@@ -43,8 +44,8 @@ class PerfilPage extends StatelessWidget {
           begin: FractionalOffset(0.0, 0.6),
           end:FractionalOffset(0.0, 1.0),
           colors: [
-            Color.fromRGBO(76, 186, 237, 1.0),
-            Color.fromRGBO(126, 202, 237, 1.0),
+            Color.fromRGBO(255, 255, 255, 1.0),
+            Color.fromRGBO(250, 250, 250, 1.0),
           ]
           )
       ),
@@ -115,7 +116,7 @@ class PerfilPage extends StatelessWidget {
           padding: EdgeInsets.all(20.0),
           child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: <Widget>[            
            _crearBotonRedondeadoDona(context, Colors.pinkAccent[700],'DonaCoins'),
          
           ],
@@ -126,26 +127,87 @@ class PerfilPage extends StatelessWidget {
 
    Widget _infoMedallas(BuildContext context){
   
-    return Table(
-      
-       children: [
-         TableRow(
-           children: [
-             _crearBotonRedondeadoMedallas(Colors.pinkAccent[700],Icons.person,'Perfil'),
-             _crearBotonRedondeadoMedallas(Colors.redAccent,Icons.business,'Donaciones')
+   return SafeArea(      
+          child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+           _crearBotonRedondeadoRecom(context, Colors.pinkAccent[700],'Medallas'),
+         
+          ],
+        ),
+      ),
+    );
 
-           ]
-         ),
-         TableRow(
-           children: [
-             _crearBotonRedondeadoMedallas(Colors.tealAccent,Icons.store_mall_directory,'Promociones'),
-             _crearBotonRedondeadoMedallas(Colors.lightGreenAccent,Icons.supervisor_account,'Municipios y ONGs')
-           ]
-         ),         
-       ],
-     );
+
+    
   }
 
+ Widget _crearBotonRedondeadoRecom(BuildContext context,Color color, String texto){
+
+      final size= MediaQuery.of(context).size;
+    
+     return ClipRect(        
+         child: Container(
+           padding: EdgeInsets.only(left: 20.0),
+           height: size.height * 0.50,
+           width: size.width * 0.90,
+           decoration: BoxDecoration(
+             color: Color.fromRGBO(62, 66, 107, 0.7),
+             borderRadius: BorderRadius.circular(20.0)
+           ),  
+           child: Column(
+             
+             mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                 Text('Recompensas Obtenidas',style: TextStyle(color:Colors.white,fontSize:20.0,fontWeight: FontWeight.bold),),
+                 _medallas(),
+                 
+              ],
+           ),
+
+
+         ),
+         
+
+     /*   ), */
+     );
+
+   }
+  
+   Widget _medallas(){
+     
+     return Container(
+
+      padding: EdgeInsets.all(10.0),
+      child: Table(        
+         children: [           
+           TableRow(
+             children: [
+               _crearBotonRedondeadoMedallas(Colors.pinkAccent[700],Icons.person,'Buena persona'),
+               _crearBotonRedondeadoMedallas(Colors.redAccent,Icons.business,'Llegaras alto')
+
+             ]
+           ), 
+           TableRow(
+             children: [
+               _crearBotonRedondeadoMedallas(Colors.pinkAccent[700],Icons.person,'Buena persona'),
+               _crearBotonRedondeadoMedallas(Colors.redAccent,Icons.business,'Llegaras alto')
+
+             ]
+           ),   
+             TableRow(
+             children: [
+               _crearBotonRedondeadoMedallas(Colors.pinkAccent[700],Icons.person,'Buena persona'),
+               _crearBotonRedondeadoMedallas(Colors.redAccent,Icons.business,'Llegaras alto')
+
+             ]
+           ),           
+         ],
+       ),
+    );
+   }
 
 
   Widget _crearBotonRedondeadoDona(BuildContext context,Color color, String texto){
@@ -163,11 +225,14 @@ class PerfilPage extends StatelessWidget {
            child: Column(
              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                 Text('DonaCoins',style: TextStyle(color:Colors.white,fontSize:30.0,fontWeight: FontWeight.bold),),
+                 Text('DonaCoins',style: TextStyle(color:Colors.white,fontSize:30.0,fontWeight: FontWeight.bold),),         
+                 Icon(Icons.flare,size: 50.0,),       
                  Text('200 DonaCoins',style: TextStyle(color:Colors.white,fontSize:30.0,fontWeight: FontWeight.bold),)
                  
               ],
+
            ),
+           
 
          ),
          
@@ -181,23 +246,20 @@ class PerfilPage extends StatelessWidget {
 
 
      return ClipRect(
-        /* child: BackdropFilter( */
-         /* filter: ImageFilter.blur( sigmaX:10.0, sigmaY:10.0), */
+        /* /* child: BackdropFilter( */
+         /* filter: ImageFilter.blur( sigmaX:10.0, sigmaY:10.0), */ */
          child: Container(
-           height: 180.0,
-           margin: EdgeInsets.all(15.0),
-           decoration: BoxDecoration(
-             color: Color.fromRGBO(62, 66, 107, 0.7),
-             borderRadius: BorderRadius.circular(20.0)
-           ),
+           height: 120.0,
+           width: 100.0,
+           margin: EdgeInsets.only(right: 20.0),
            child: Column(
              mainAxisAlignment: MainAxisAlignment.spaceAround,
              children: <Widget>[
                SizedBox(height: 5.0),
                CircleAvatar(
                  backgroundColor: color,
-                 radius: 55.0,
-                 child: Icon( icono, color: Colors.white, size: 50.0),
+                 radius: 25.0,
+                 child: Icon( icono, color: Colors.white, size: 40.0),
                ),
                Text(texto,style: TextStyle( color: color )),
                SizedBox(height: 5.0)
@@ -209,16 +271,32 @@ class PerfilPage extends StatelessWidget {
 
    }
 
- 
+    Widget _botonDonar(BuildContext context){
 
-   
-   
+       
+          return RaisedButton(
+             child: Container(
+            padding: EdgeInsets.symmetric(horizontal:80.0, vertical:15.0),
+            child: Text('Quiero donar'),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+           ),
+           elevation: 0.0,
+           color:Colors.purple,
+           textColor: Colors.white,
+           onPressed:(null),
+          );
+
+     
+    } 
+
   Widget _bottomNavigatorBar(BuildContext context){
 
     return new Theme(
       data: Theme.of(context).copyWith(
          canvasColor: Color.fromRGBO(76, 186, 237, 1.0) ,
-         primaryColor: Colors.grey,
+         primaryColor: Colors.white,
          textTheme: Theme.of(context).textTheme.copyWith(
            caption:TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0))
          )
