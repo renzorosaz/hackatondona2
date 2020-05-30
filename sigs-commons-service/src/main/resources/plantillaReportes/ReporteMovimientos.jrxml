@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteMovimientos" pageWidth="780" pageHeight="595" orientation="Landscape" columnWidth="780" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="f51b19be-6bf5-43db-a07d-99e9e1480e6e">
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="ireport.zoom" value="0.9090909090909133"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<import value="org.apache.commons.lang.time.*"/>
+	<parameter name="MyDate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="titulo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="mes" class="java.lang.String"/>
+	<field name="desTipoMovimiento" class="java.lang.String"/>
+	<field name="cantidadMovimiento" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="112" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="679" y="8" width="100" height="20" uuid="0f59cf6f-0408-43bc-9332-b75fa09b7f47"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="606" y="9" width="70" height="20" uuid="8ac5a07d-6ff0-4a19-a5b0-06f93453e2ad"/>
+				<text><![CDATA[Fecha y Hora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="40" width="755" height="30" uuid="129a36d7-4d2b-4fd8-badd-e02a7f755909"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" ' " + $P{titulo} + " ' "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="383" splitType="Stretch">
+			<lineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="10" y="0" width="755" height="290" uuid="f5eab045-049e-47d8-8d2a-2087abcdfd5d"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{desTipoMovimiento}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{mes}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{cantidadMovimiento}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>

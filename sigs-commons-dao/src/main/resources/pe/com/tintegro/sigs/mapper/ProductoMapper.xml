@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="pe.com.tintegro.sigs.mapper.ProductoMapper">
+ 	
+ 	 <resultMap type="pe.com.tintegro.sigs.entidad.Producto" id="productoResultMap">
+ 	 	<result property="idProducto" column="id_producto"/>
+		<result property="precioProducto" column="precio_producto"/>
+		<result property="descripcionProducto" column="descripcion_producto"/>
+		<result property="marca" column="marca"/>
+		<result property="flagOTC" column="flag_otc"/>
+		<result property="flagGenerico" column="flag_generico"/>
+		<result property="flagEstado" column="flag_estado"/>
+		<result property="cantidadStock" column="cantidad_stock"/>
+		<result property="imagenProducto" column="imagen_producto"/>
+		<result property="nombreProducto" column="nombre_producto"/>
+		<result property="nombreMedicamento" column="nombre_medicamento"/>
+		<result property="sku" column="sku"/>
+		<association property="categoria" javaType="pe.com.tintegro.sigs.entidad.Categoria">
+			<result property="idCategoria" column="id_categoria"/>
+			<result property="nombreCategoria" column="nombre_categoria"/>
+		</association>
+		<association property="tipoRecipiente" javaType="pe.com.tintegro.sigs.entidad.TipoRecipiente">
+			<result property="idTipoRecipiente" column="id_tipo_recipiente"/>
+			<result property="nombreRecipiente" column="nombre_recipiente"/>
+		</association>
+<!-- 	<result property="idProducto" column="id_producto" />
+		<result property="descripcionProducto" column="descripcion_producto" />
+		<result property="nombreProducto" column="nombre_producto"/>
+		<result property="nombreMedicamento" column="nombre_medicamento"/>
+		<result property="marca" column="marca" />
+		<result property="imagenProducto" column="imagen_producto" />
+		<result property="cantidadStock" column="cantidad_stock" />
+		<association property="categoria" javaType="pe.com.tintegro.sigs.entidad.Categoria">
+			<result property="idCategoria" column="id_categoria"/>
+			<result property="nombreCategoria" column="nombre_categoria"/>
+		</association>
+		<collection property="unidadList" ofType="pe.com.tintegro.sigs.entidad.Unidad">
+			<id property="idUnidad" column="id_unidad" />
+			
+			<result property="idUnidad" column="id_unidad"/>
+			<result property="nombreUnidad" column="nombre_unidad"/>
+			<result property="precio" column="precio_producto"/>	
+			<result property="medidaUnidad" column="medida_unidad"/>		
+		</collection> -->
+	</resultMap>
+	
+	<resultMap type="pe.com.tintegro.sigs.entidad.Producto" id="productoPorIDResultMap">
+		<result property="idProducto" column="id_producto"/>
+		<result property="precioProducto" column="precio_producto"/>
+		<result property="descripcionProducto" column="descripcion_producto"/>
+		<result property="marca" column="marca"/>
+		<result property="flagOTC" column="flag_otc"/>
+		<result property="flagGenerico" column="flag_generico"/>
+		<result property="flagEstado" column="flag_estado"/>
+		<result property="cantidadStock" column="cantidad_stock"/>
+		<result property="imagenProducto" column="imagen_producto"/>
+		<result property="nombreProducto" column="nombre_producto"/>
+		<result property="nombreMedicamento" column="nombre_medicamento"/>
+		<result property="sku" column="sku"/>
+		<!--<result property="cantidadRecipiente" column="cantidad_recipiente"/> -->
+		<association property="categoria" javaType="pe.com.tintegro.sigs.entidad.Categoria">
+			<result property="idCategoria" column="id_categoria"/>
+			<result property="nombreCategoria" column="nombre_categoria"/>
+		</association>
+		<association property="tipoRecipiente" javaType="pe.com.tintegro.sigs.entidad.TipoRecipiente">
+			<result property="idTipoRecipiente" column="id_tipo_recipiente"/>
+			<result property="nombreRecipiente" column="nombre_recipiente"/>
+		</association>
+		<!-- <result property="idProducto" column="id_producto"/>
+		<result property="precioProducto" column="precio_producto"/>
+		<result property="descripcionProducto" column="descripcion_producto"/>
+		<result property="marca" column="marca"/>
+		<result property="flagOTC" column="flag_otc"/>
+		<result property="flagGenerico" column="flag_generico"/>
+		<result property="flagEstado" column="flag_estado"/>
+		<result property="cantidadStock" column="cantidad_stock"/>
+		<result property="imagenProducto" column="imagen_producto"/>
+		<association property="categoria" javaType="pe.com.tintegro.sigs.entidad.Categoria">
+			<result property="idCategoria" column="id_categoria"/>
+			<result property="nombreCategoria" column="nombre_categoria"/>
+		</association> -->
+	</resultMap>
+ 
+	<resultMap type="pe.com.tintegro.sigs.entidad.general.Confirmacion" id="confirmacionResultMap">
+		<result property="id" column="id_result" />
+		<result property="mensaje" column="no_respuesta" />
+	</resultMap>	
+	<resultMap type="pe.com.tintegro.sigs.entidad.general.Confirmacion" id="confirmacionResultMap2">
+		<result property="id" column="id_result" />
+		<result property="mensaje" column="mensaje" />
+	</resultMap>
+	
+	<select id="insertProducto" resultMap="confirmacionResultMap">
+		select * from "Main".fn_mw_insert_producto(#{jsonProducto});
+	</select>
+	
+	<select id = "obtenerProductoDescripcion" resultMap = "productoResultMap">
+		select * from "Main".fn_mw_select_producto_descripcion(#{nombreProducto}, #{flag});
+	</select>
+	
+		<select id="updateProducto" resultMap="confirmacionResultMap">
+		select * from "Main".fn_mw_update_producto(#{jsonProducto});
+	</select>
+	
+	<select id = "obtenerProducto" resultMap = "productoPorIDResultMap">
+		select * from "Main".fn_mw_select_tb_producto_por_id_producto(#{idProducto});
+	</select>
+	
+	<select id="deleteProducto" resultMap="confirmacionResultMap2">
+		select * from "Main".fn_mw_delete_tb_producto(#{idProducto});
+	</select>
+	
+ </mapper> 
