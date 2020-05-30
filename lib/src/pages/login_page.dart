@@ -6,9 +6,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body:Stack(
-        children: <Widget>[
-          _logo(),
+      body:Stack(        
+        children: <Widget>[                    
           _crearFondo(context),
           _loginForm(context),
         ],
@@ -16,22 +15,7 @@ class LoginPage extends StatelessWidget {
     );
   }
   
-  Widget _logo(){
-   return
-       Container(
-         decoration: BoxDecoration(
-            color: Colors.transparent,
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage(
-                'assets/dona.jpg',
-              ),
-            ),
-          ),
-          height: 350.0,
-       );     
-    
-  }
+  
   Widget _loginForm(BuildContext context){
 
     final size= MediaQuery.of(context).size;
@@ -65,6 +49,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
+                
                 Text('Ingreso', style : TextStyle(fontSize: 20.0)),
                 SizedBox(height: 60.0),
                 _crearEmail(),
