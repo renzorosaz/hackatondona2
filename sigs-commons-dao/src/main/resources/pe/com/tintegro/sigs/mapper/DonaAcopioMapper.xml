@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="pe.com.tintegro.sigs.mapper.DonaAcopioMapper">
+
+	
+	<resultMap type="pe.com.tintegro.sigs.entidad.DonaAcopio" id="donaAcopioResultMap">
+		<result property="idDonacionAcopio" column="id_punto_acopio" />
+		<result property="latitud" column="latitud" />
+		<result property="longitud" column="longitud" />
+		<result property="nombre" column="nombre" />
+		<result property="descripcion" column="descripcion" />
+		<result property="direccion" column="direccion" />
+		<result property="habilitado" column="habilitado" />
+	</resultMap>
+
+	<select id="obtenerPuntosAcopio" resultMap="donaAcopioResultMap">
+		SELECT * from "Dona2".fn_mw_select_tb_punto_de_acopio();
+	</select>
+
+</mapper>
+
