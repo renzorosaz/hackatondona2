@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:hackaton/utils/utils.dart' as utils;
 
 
+
 class DonacionPage extends StatefulWidget {
   DonacionPage({Key key}) : super(key: key);
 
@@ -30,35 +31,32 @@ class _DonacionPageState extends State<DonacionPage> {
       appBar: AppBar(
         title:Text('Donacion'),
         actions: <Widget>[
-          IconButton(
+          /* IconButton(
             icon: Icon(Icons.photo_size_select_actual),
             onPressed: _seleccionarFoto,
             ),
             IconButton(
             icon: Icon(Icons.camera_alt),
             onPressed: _tomarFoto,
-            ),
+            ), */
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
+      body:  Container(
           padding: EdgeInsets.all(15.0),
           child: Form(
           /*   key: formKey, */
             child: Column(
               children: <Widget>[   
-                _crearCodigoD(),             
-                _crearDescripcion(),
-                
+                _crearCodigoD(),
+                _crearDescripcion(),                
                 _mostrarFoto(),
-                _mostrarPuntos(),
-                _crearBoton()
+                /*_mostrarPuntos(),
+                _crearBoton() */
               ],
             ),
            
           ),
-        ),
-      ),
+        ),      
     );
   }
 
@@ -169,12 +167,12 @@ class _DonacionPageState extends State<DonacionPage> {
 
               padding: EdgeInsets.symmetric(vertical:20.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text('Foto de al Donación'),
                   FadeInImage(
                     image: NetworkImage(producto.fotoUrl),                 
-                    placeholder: AssetImage('carga.gif'),
+                    placeholder: AssetImage('assets/jar-loading.gif'),
                     height: 150.0,
                     fit: BoxFit.cover,
                   ),
@@ -195,7 +193,7 @@ class _DonacionPageState extends State<DonacionPage> {
           }
   }
 
-  _seleccionarFoto() async{
+  /* _seleccionarFoto() async{
     
    _procesarImagen(ImageSource.gallery);
 
@@ -209,7 +207,7 @@ class _DonacionPageState extends State<DonacionPage> {
 
   _procesarImagen(ImageSource origen) async{
 
-       foto = await ImagePicker.pickImage(
+       foto = await ImagePicker.getImage(
       
          source: origen
 
@@ -221,5 +219,6 @@ class _DonacionPageState extends State<DonacionPage> {
 
    setState(() {});
    
-  }
+  } */
+
 }

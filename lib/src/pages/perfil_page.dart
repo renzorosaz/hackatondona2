@@ -1,16 +1,18 @@
 
 import 'package:flutter/material.dart';
 
+
 class PerfilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
+    
+        return Scaffold(
       appBar: AppBar(
         title: Text('PERFIL'),
       ),
-      body: Stack(
+      body:      
+       Stack(
         children: <Widget>[ 
              SingleChildScrollView(
             child: Column(
@@ -29,7 +31,7 @@ class PerfilPage extends StatelessWidget {
         ],
 
       ),
-      bottomNavigationBar: _bottomNavigatorBar(context)
+      
     );
   }
 
@@ -74,27 +76,6 @@ class PerfilPage extends StatelessWidget {
   
   }
 
-  Widget _infoCoins(BuildContext context){
-    
-    return SafeArea(      
-          child: Container(
-            
-            padding: EdgeInsets.all(20.0),
-           margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 20.0),
-           
-           child: Column(   
-                    mainAxisAlignment: MainAxisAlignment.end,           
-                    children: <Widget>[
-                    Text('Robiño Poliño',style: TextStyle(color:Colors.black,fontSize:20.0,fontWeight: FontWeight.bold),),   
-                    Divider(),        
-                   Text('200 Donacoins',style: TextStyle(color:Colors.lightBlue[300],fontSize:20.0,fontWeight: FontWeight.w600),),
-                   Text('Código: sehi3939 ',style: TextStyle(color:Colors.black,fontSize:20.0,fontWeight: FontWeight.w600),),
-                      
-                ],
-              ),            
-          ),
-    );
-  }
 
   Widget _infoDetalle(BuildContext context){
 
@@ -218,34 +199,8 @@ class PerfilPage extends StatelessWidget {
 
    }
 
-  Widget _bottomNavigatorBar(BuildContext context){
 
-    return new Theme(
-      data: Theme.of(context).copyWith(
-         canvasColor: Color.fromRGBO(76, 186, 237, 1.0) ,
-         primaryColor: Colors.white,
-         textTheme: Theme.of(context).textTheme.copyWith(
-           caption:TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0))
-         )
-      ),
-      child: BottomNavigationBar(
-
-        items:[
-          BottomNavigationBarItem(
-            icon:Icon(Icons.dehaze,size:35.0),
-            title: Container(),
-          ),
-          BottomNavigationBarItem(
-            icon:Icon(Icons.add_shopping_cart,size:35.0),
-             title: Container(),
-          ),
-          BottomNavigationBarItem(
-            icon:Icon(Icons.mood,size:35.0),
-             title: Container(),
-          )
-        ] ,
-      ),
-    );
+  
+  
 
   }
-}

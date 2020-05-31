@@ -23,7 +23,7 @@ class MenuPage extends StatelessWidget {
             _crearMarcadores(),
           ], 
         ),
-      bottomNavigationBar: _bottomNavigatorBar(context)
+     
     );
   }
 
@@ -164,33 +164,4 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  Widget _bottomNavigatorBar(BuildContext context){
-
-    return new Theme(
-      data: Theme.of(context).copyWith(
-         canvasColor: Color.fromRGBO(76, 186, 237, 1.0),
-         primaryColor: Colors.pinkAccent,
-         textTheme: Theme.of(context).textTheme.copyWith(
-           caption:TextStyle(color: Color.fromRGBO(91, 236, 236, 1.0))
-         )
-      ),
-      child: BottomNavigationBar(
-
-        items:[
-          BottomNavigationBarItem(
-            icon:Icon(Icons.dehaze,size:35.0),
-            title: Container(),
-          ),
-          BottomNavigationBarItem(
-            icon:Icon(Icons.add_shopping_cart,size:35.0),
-             title: Container(),
-          ),
-          BottomNavigationBarItem(
-            icon:Icon(Icons.mood,size:35.0),
-             title: Container(),
-          )
-        ] ,
-      ),
-    );
-  }
 }
