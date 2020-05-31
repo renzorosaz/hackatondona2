@@ -8,10 +8,41 @@
   	<resultMap type="pe.com.tintegro.sigs.entidad.general.Confirmacion" id="confirmacionResultMap">
 		<result property="id" column="id_result" />
 		<result property="mensaje" column="no_respuesta" />
-	</resultMap>	
+	</resultMap>
 	
+	<resultMap type="pe.com.tintegro.sigs.dto.response.InicioSesionResponse" id="confirmacionNDResultMap">
+		<result property="idUsuario" column="id_usuario"/>
+		<association property="confirmacion" javaType="pe.com.tintegro.sigs.entidad.general.Confirmacion">
+			<result property="id" column="id_result" />
+			<result property="mensaje" column="mensaje" />
+		</association>	
+	</resultMap>
+	
+	<resultMap type="pe.com.tintegro.sigs.entidad.Usuario" id="usuarioInfoResultMap">
+ 	 	<result property="nombres" column="nombres"/>
+		<result property="apellidos" column="apellidos"/>
+		<result property="foto" column="foto"/>
+		<result property="codigo" column="codigo"/>
+		<result property="habilitado" column="habilitado"/>
+		<association property="donacoin" javaType="pe.com.tintegro.sigs.entidad.Donacoin">
+			<result property="puntosGanados" column="puntos_ganados"/>
+			<result property="puntosVerificados" column="puntos_verificados"/>
+			<result property="puntosCanjeados" column="puntos_canjeados"/>
+			<result property="numeroDonaciones" column="numero_donaciones"/>
+		</association>
+	</resultMap>
+
  	<select id="insertUsuario" resultMap="confirmacionResultMap">
 		select * from "Dona2".fn_mw_insert_usuario(#{jsonUsuario});
 	</select>
+	
+	<select id="inicioSesion" resultMap="confirmacionNDResultMap">
+		select * from "Dona2".fn_mw_inicio_sesion_dona2(#{jsonUsuario});
+	</select>
+	
+		<select id="obtenerUsuarioInfo" resultMap="usuarioInfoResultMap">
+		select * from "Dona2".fn_mw_select_tb_info_usuario(#{idUsuario});
+	</select>
+	
 	
  </mapper> 

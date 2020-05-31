@@ -17,6 +17,15 @@ public class Usuario {
 	private String codigo;
 	private Boolean habilitado;
 	
+	private Donacoin donacoin;
+	
+	
+	public Donacoin getDonacoin() {
+		return donacoin;
+	}
+	public void setDonacoin(Donacoin donacoin) {
+		this.donacoin = donacoin;
+	}
 	public Integer getIdUsuario() {
 		return idUsuario;
 	}
