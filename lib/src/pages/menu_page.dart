@@ -1,96 +1,166 @@
-import 'package:flutter/material.dart';
 
-import 'dart:math';
-import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart' as d;
 
 class MenuPage extends StatelessWidget {
+
   const MenuPage({Key key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _fondoApp(),
 
-          SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                _titulos(),
-                _botonRedondeados()
-              ],
+      return Scaffold(
+        body: FlutterMap(
+          options: MapOptions(
+            center: d.LatLng(-12.169050, -76.972275),
+              zoom: 13.0,
             ),
-          )
-
-        ],
-      ),
-       bottomNavigationBar: _bottomNavigatorBar(context)
-    );
-  }
-
-  Widget _fondoApp(){
-
-    final gradiente = Container(
-      width:double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset(0.0, 0.6),
-          end:FractionalOffset(0.0, 1.0),
-          colors: [
-            Color.fromRGBO(76, 186, 237, 1.0),
-            Color.fromRGBO(126, 202, 237, 1.0),
-          ]
-          )
-      ),
-    );
-
-      final cajaCeleste=Transform.rotate(
-        angle: -pi/4.0,
-
-        child:Container(
-          height: 360.0,
-          width: 360.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(80.0),
-            gradient: LinearGradient(
-              colors: [
-                Color.fromRGBO(91, 236, 236, 1.0),
-                Color.fromRGBO(159, 236, 236, 1.0),
-              ]
-            )
-          ),
-        )
-     );
-
-
-    return Stack(
-      children: <Widget>[
-        gradiente,
-        Positioned(
-          top:-100.0,
-          child: cajaCeleste
-          )
-      ],
-    );
-
-  }
-
-  Widget _titulos(){
-  
-    return SafeArea(
-          child: Container(
-          padding: EdgeInsets.all(20.0),
-          child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('! Anímate a Donar !',style: TextStyle(color:Colors.white,fontSize:30.0,fontWeight: FontWeight.bold),),
-            SizedBox(height: 10.0,),
-            Text('En dona2 premiamos la buena voluntad, descubre las increibles promociones que tenemos para tí',style: TextStyle(color:Colors.white,fontSize:18.0,fontWeight: FontWeight.bold), ),
-          ],
+          layers:<LayerOptions>[
+            _crearMapa(),      
+            _crearMarcadores(),
+          ], 
         ),
-      ),
+      bottomNavigationBar: _bottomNavigatorBar(context)
+    );
+  }
+
+  _crearMapa() {
+
+    return TileLayerOptions(
+      urlTemplate: 'https://api.mapbox.com/v4/'
+      '{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}',
+      additionalOptions: {
+        'accessToken': 'pk.eyJ1Ijoia2xlcml0aCIsImEiOiJjanY2MjF4NGIwMG9nM3lvMnN3ZDM1dWE5In0.0SfmUpbW6UFj7ZnRdRyNAw',
+        'id': 'mapbox.streets' 
+        // streets, dark, light, outdoors, satellite
+      }
+    );
+  }
+
+
+  _crearMarcadores() {
+
+
+    return MarkerLayerOptions(      
+      markers: <Marker>[        
+        Marker(          
+          width: 100.0,
+          height: 100.0,
+          point:  d.LatLng(double.parse('-12.167860') , double.parse(' -76.978123')),
+          builder: ( context ) => Container(
+            child: IconButton( 
+              icon: Icon(Icons.location_on), 
+              iconSize: 70.0,
+              color: Theme.of(context).primaryColor,
+              onPressed: (){
+                showModalBottomSheet(                  
+                  context: context, 
+                  builder: (builder){
+                    return Container(
+                      child: Form(
+                        child: ListView(
+                          children: <Widget>[
+                            FadeInImage(
+                              image: NetworkImage('https://lh3.googleusercontent.com/p/AF1QipM4FQkwKMIBFvSQcGOuuQVLyuIOQd8_ydyaWQ_A=s1600-w1024'),
+                              placeholder: AssetImage('assets/jar-loading.gif'),
+                              height: 300.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Text('Metro Miotta', textAlign: TextAlign.start, style: TextStyle(fontSize: 20),),
+                            SizedBox(height: 5,),
+                            Text('Av los alamos 141, a la altura de puente alipio'),
+                            SizedBox(height: 5,),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                );
+              },
+            ),            
+          )
+        ),
+
+        Marker(          
+          width: 100.0,
+          height: 100.0,
+          point:  d.LatLng(double.parse('-12.147551') , double.parse(' -76.981335')),
+          builder: ( context ) => Container(
+            child: IconButton( 
+              icon: Icon(Icons.location_on), 
+              iconSize: 70.0,
+              color: Theme.of(context).primaryColor,
+              onPressed: (){
+                showModalBottomSheet(                  
+                  context: context, 
+                  builder: (builder){
+                    return Container(
+                      child: Form(
+                        child: ListView(
+                          children: <Widget>[
+                            FadeInImage(
+                              image: NetworkImage('https://lh3.googleusercontent.com/p/AF1QipNzB0SgDbF2J3V6DqDEefCYdLPvALxRO1JC_XHp=s1600-w1024'),
+                              placeholder: AssetImage('assets/jar-loading.gif'),
+                              height: 300.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Text('Real Plaza Atocongo', textAlign: TextAlign.start, style: TextStyle(fontSize: 20),),
+                            SizedBox(height: 5,),
+                            Text('Carretera Central, panamericana Sur Jose Galvez 245'),
+                            SizedBox(height: 5,),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                );
+              },
+            ),            
+          )
+        ),
+
+        Marker(          
+          width: 100.0,
+          height: 100.0,
+          point:  d.LatLng(double.parse('-12.168558') , double.parse('-76.982938')),
+          builder: ( context ) => Container(
+            child: IconButton( 
+              icon: Icon(Icons.location_on), 
+              iconSize: 70.0,
+              color: Theme.of(context).primaryColor,
+              onPressed: (){
+                showModalBottomSheet(                  
+                  context: context, 
+                  builder: (builder){
+                    return Container(
+                      child: Form(
+                        child: ListView(
+                          children: <Widget>[
+                            FadeInImage(
+                              image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTZJLreyaQCFT5ZoJZUBK88mUENNKmdu2BeWFvYCY5IkT-3umjm&usqp=CAU'),
+                              placeholder: AssetImage('assets/jar-loading.gif'),
+                              height: 300.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Text('Loza deportiva N°3 Residencial Inclan', textAlign: TextAlign.start, style: TextStyle(fontSize: 20,),),
+                            SizedBox(height: 5,),
+                            Text('Av los andes de Colon 32, a 3 cuadras del hospital solidaridad'),
+                            SizedBox(height: 5,),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                );
+              },
+            ),            
+          )
+        ),
+        
+      ]
     );
   }
 
@@ -98,7 +168,7 @@ class MenuPage extends StatelessWidget {
 
     return new Theme(
       data: Theme.of(context).copyWith(
-         canvasColor: Color.fromRGBO(91, 236, 236, 1.0) ,
+         canvasColor: Color.fromRGBO(76, 186, 237, 1.0),
          primaryColor: Colors.pinkAccent,
          textTheme: Theme.of(context).textTheme.copyWith(
            caption:TextStyle(color: Color.fromRGBO(91, 236, 236, 1.0))
@@ -122,68 +192,5 @@ class MenuPage extends StatelessWidget {
         ] ,
       ),
     );
-
   }
-
-  Widget _botonRedondeados(){
-
-     return Table(
-       children: [
-         TableRow(
-           children: [
-             _crearBotonRedondeado(Colors.pinkAccent[700],Icons.person,'Perfil'),
-             _crearBotonRedondeado(Colors.redAccent,Icons.business,'Donaciones')
-
-           ]
-         ),
-         TableRow(
-           children: [
-             _crearBotonRedondeado(Colors.tealAccent,Icons.store_mall_directory,'Promociones'),
-             _crearBotonRedondeado(Colors.lightGreenAccent,Icons.supervisor_account,'Municipios y ONGs')
-           ]
-         ),
-         TableRow(
-           children: [
-            _crearBotonRedondeado(Colors.purpleAccent,Icons.sms,'¿Cómo Donar?'),
-            _crearBotonRedondeado(Colors.indigoAccent[800],Icons.wifi_tethering,'DonaPoints')
-           ]
-         )
-       ],
-     );
-   }
-
-   Widget _crearBotonRedondeado(Color color, IconData icono, String texto){
-
-
-
-     return ClipRect(
-        /* child: BackdropFilter( */
-         /* filter: ImageFilter.blur( sigmaX:10.0, sigmaY:10.0), */
-         child: Container(
-           height: 180.0,
-           margin: EdgeInsets.all(15.0),
-           decoration: BoxDecoration(
-             color: Color.fromRGBO(62, 66, 107, 0.7),
-             borderRadius: BorderRadius.circular(20.0)
-           ),
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.spaceAround,
-             children: <Widget>[
-               SizedBox(height: 5.0),
-               CircleAvatar(
-                 backgroundColor: color,
-                 radius: 55.0,
-                 child: Icon( icono, color: Colors.white, size: 50.0),
-               ),
-               Text(texto,style: TextStyle( color: color )),
-               SizedBox(height: 5.0)
-             ],
-           ),
-         ),
-     /*   ), */
-     );
-
-   }
-
-
 }
