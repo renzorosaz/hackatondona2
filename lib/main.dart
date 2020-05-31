@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hackaton/src/pages/donacion_page.dart';
 import 'package:hackaton/src/pages/menu_page.dart';
 import 'package:hackaton/src/pages/perfil_page.dart';
-import 'package:hackaton/src/pages/registro_page.dart';
 
 void main() async => runApp(MyApp());
 
@@ -21,7 +21,7 @@ class _MyApp extends State<MyApp>{
       initialRoute: 'perfil',
       routes: {
         'perfil' : (BuildContext context) => PerfilPage(),
-        'registro' : (BuildContext context) => RegistroPage(),
+        'registro' : (BuildContext context) => DonacionPage(),
         'menu' : (BuildContext context) => MenuPage(),
       },
     );
