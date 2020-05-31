@@ -16,9 +16,9 @@ class PersonaBloc{
       
       Future<String> cargarPersona(String codigo) async{
 
-          _cargandoController.sink.add(true);
+     /*      _cargandoController.sink.add(true);
       await _personaProvider..cargarPersona(codigo);
-      _cargandoController.sink.add(false);
+      _cargandoController.sink.add(false); */
 
       }
 }

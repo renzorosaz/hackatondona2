@@ -13,6 +13,9 @@ class MenuPage extends StatelessWidget {
 
 
       return Scaffold(
+        appBar: AppBar(
+          title: Text('DonaPoints'),
+        ),
         body: FlutterMap(
           options: MapOptions(
             center: d.LatLng(-12.169050, -76.972275),
@@ -23,7 +26,6 @@ class MenuPage extends StatelessWidget {
             _crearMarcadores(),
           ], 
         ),
-     
     );
   }
 
@@ -136,7 +138,7 @@ class MenuPage extends StatelessWidget {
                   context: context, 
                   builder: (builder){
                     return Container(
-                      child: Form(
+                      child: Form(                        
                         child: ListView(
                           children: <Widget>[
                             FadeInImage(
@@ -164,4 +166,5 @@ class MenuPage extends StatelessWidget {
     );
   }
 
+ 
 }

@@ -1,55 +1,41 @@
-// To parse this JSON data, do
-//
-//     final persona = personaFromJson(jsonString);
-
 import 'dart:convert';
 
-Persona personaFromJson(String str) => Persona.fromJson(json.decode(str));
+PersonaModel clientFromJson(String str) => PersonaModel.fromJson(json.decode(str));
 
-String personaToJson(Persona data) => json.encode(data.toJson());
+String clientToJson(PersonaModel data) => json.encode(data.toJson());
 
-class Persona {
-    PersonaClass persona;
-
-    Persona({
-        this.persona,
-    });
-
-    factory Persona.fromJson(Map<String, dynamic> json) => Persona(
-        persona: PersonaClass.fromJson(json["persona"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "persona": persona.toJson(),
-    };
-}
-
-class PersonaClass {
+class PersonaModel {
     String apellidoMaterno;
     String apellidoPaterno;
-    int codigo;
+    String codigo;
+    int contrasea;
     String direccion;
     bool esDonador;
     String nombre;
+    int puntos;
     String usuario;
 
-    PersonaClass({
+    PersonaModel({
         this.apellidoMaterno,
         this.apellidoPaterno,
         this.codigo,
+        this.contrasea,
         this.direccion,
         this.esDonador,
         this.nombre,
+        this.puntos,
         this.usuario,
     });
 
-    factory PersonaClass.fromJson(Map<String, dynamic> json) => PersonaClass(
+    factory PersonaModel.fromJson(Map<String, dynamic> json) => PersonaModel(
         apellidoMaterno: json["apellido_materno"],
         apellidoPaterno: json["apellido_paterno"],
         codigo: json["codigo"],
+        contrasea: json["contraseña"],
         direccion: json["direccion"],
         esDonador: json["esDonador"],
         nombre: json["nombre"],
+        puntos: json["puntos"],
         usuario: json["usuario"],
     );
 
@@ -57,9 +43,11 @@ class PersonaClass {
         "apellido_materno": apellidoMaterno,
         "apellido_paterno": apellidoPaterno,
         "codigo": codigo,
+        "contraseña": contrasea,
         "direccion": direccion,
         "esDonador": esDonador,
         "nombre": nombre,
+        "puntos": puntos,
         "usuario": usuario,
     };
 }
