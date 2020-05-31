@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import pe.com.tintegro.sigs.constants.ResponseEstado;
-import pe.com.tintegro.sigs.dto.request.InsertarCheckDonacionRequest;
-import pe.com.tintegro.sigs.dto.response.InsertarCheckDonacionResponse;
+import pe.com.tintegro.sigs.dto.request.InicioSesionOrganizacionRequest;
+import pe.com.tintegro.sigs.dto.response.InicioSesionOrganizacionResponse;
 import pe.com.tintegro.sigs.helpers.ResponseHelper;
 import pe.com.tintegro.sigs.properties.APIProperties;
-import pe.com.tintegro.sigs.service.CheckDonacionService;
+import pe.com.tintegro.sigs.service.OrganizacionService;
 
 @RestController
-@RequestMapping("/checkDonacion")
-@Api(value = "CheckDonacion")
+@RequestMapping("/organizacion")
+@Api(value = "Organizacion")
 @CrossOrigin(origins="*")
-public class CheckDonacionController {
-
-private static final Logger LOG = Logger.getLogger(CheckDonacionController.class);
+public class OrganizacionController {
+	
+private static final Logger LOG = Logger.getLogger(OrganizacionController.class);
 	
 	@Autowired
 	private HttpServletRequest servletRequest;
@@ -37,16 +37,16 @@ private static final Logger LOG = Logger.getLogger(CheckDonacionController.class
 	private APIProperties apiProperties;
 	
 	@Autowired
-	private CheckDonacionService checkDonacionService;
+	private OrganizacionService organizacionService;
 	
-	@RequestMapping(value = "/insertar-check-donacion", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/inicio-sesion-organizacion", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ApiOperation(value = "Inserta check donacion", notes = "Inserta check donacion", response = InsertarCheckDonacionResponse.class)
-	public InsertarCheckDonacionResponse insertCheckDonacion(@RequestBody InsertarCheckDonacionRequest request){
-		InsertarCheckDonacionResponse response = new InsertarCheckDonacionResponse();
+	@ApiOperation(value = "Inicio Sesion organizacion", notes = "Inicio Sesion organizacion", response = InicioSesionOrganizacionResponse.class)
+	public InicioSesionOrganizacionResponse inicioSesionOrganizacion(@RequestBody InicioSesionOrganizacionRequest request){
+		InicioSesionOrganizacionResponse response = new InicioSesionOrganizacionResponse();
 		
 		try {
-			response = checkDonacionService.insertarCheckDonacion(request);
+			response = organizacionService.inicioSesionOrganizacion(request);
 			
 			System.out.println(response.getEstado());
 			response.setMensaje(response.getConfirmacion().getMensaje());
@@ -61,4 +61,5 @@ private static final Logger LOG = Logger.getLogger(CheckDonacionController.class
 		}
 		return response;
 	}
+
 }

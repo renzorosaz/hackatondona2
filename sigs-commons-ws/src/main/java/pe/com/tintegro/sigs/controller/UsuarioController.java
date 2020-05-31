@@ -46,7 +46,7 @@ private static final Logger LOG = Logger.getLogger(UsuarioController.class);
 	@RequestMapping(value = "/insertar-usuario", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ApiOperation(value = "Inserta usuario", notes = "Inserta usuario", response = InsertarUsuarioResponse.class)
-	public InsertarUsuarioResponse insertProducto(@RequestBody InsertarUsuarioRequest request){
+	public InsertarUsuarioResponse insertUsuario(@RequestBody InsertarUsuarioRequest request){
 		InsertarUsuarioResponse response = new InsertarUsuarioResponse();
 		
 		try {

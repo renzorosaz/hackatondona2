@@ -1,33 +1,35 @@
 package pe.com.tintegro.sigs.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.apache.log4j.Logger;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import pe.com.tintegro.sigs.constants.ResponseEstado;
+import pe.com.tintegro.sigs.dto.request.ObtenerBeneficioRequest;
 import pe.com.tintegro.sigs.dto.request.ObtenerPuntosAcopioRequest;
+import pe.com.tintegro.sigs.dto.response.ObtenerBeneficiosResponse;
 import pe.com.tintegro.sigs.dto.response.ObtenerPuntosAcopioResponse;
 import pe.com.tintegro.sigs.helpers.ResponseHelper;
 import pe.com.tintegro.sigs.properties.APIProperties;
-import pe.com.tintegro.sigs.service.DonaAcopioService;
+import pe.com.tintegro.sigs.service.BeneficioService;
 
 @RestController
-@RequestMapping("/donaAcopio")
-@Api(value = "DonaAcopio")
+@RequestMapping("/beneficio")
+@Api(value = "Beneficio")
 @CrossOrigin(origins="*")
-public class DonaAcopioController {
-
-	private static final Logger LOG = Logger.getLogger(DonaAcopioController.class);
+public class BeneficioController {
+	
+private static final Logger LOG = Logger.getLogger(BeneficioController.class);
 	
 	@Autowired
 	private HttpServletRequest servletRequest;
@@ -36,24 +38,23 @@ public class DonaAcopioController {
 	private APIProperties apiProperties;
 	
 	@Autowired
-	private DonaAcopioService donaAcopioService;
+	private BeneficioService beneficioService;
 	
-	
-	@RequestMapping(value="/obtener-puntos-acopio",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/obtener-beneficio",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ApiOperation(value = "Obtener dona acopio", notes = "Obtiene dona acopio", response = ObtenerPuntosAcopioResponse.class)
-	public ObtenerPuntosAcopioResponse obtenerDonaAcopio() {
-		ObtenerPuntosAcopioRequest request = new ObtenerPuntosAcopioRequest();
-		ObtenerPuntosAcopioResponse response = new ObtenerPuntosAcopioResponse();
+	@ApiOperation(value = "Obtener beneficio", notes = "Obtiene todos los beneficio", response = ObtenerBeneficiosResponse.class)
+	public ObtenerBeneficiosResponse obtenerBeneficio() {
+		ObtenerBeneficioRequest request = new ObtenerBeneficioRequest();
+		ObtenerBeneficiosResponse response = new ObtenerBeneficiosResponse();
 	
 		try {
-			response = donaAcopioService.obtenerPuntosAcopio(request);
+			response = beneficioService.obtenerBeneficio(request);
 			response.setEstado(ResponseEstado.OK);
-			if(response.getDonaAcopioList().size() == 0){
-				response.setMensaje("No encuentra la lista de puntos de acopio.");
+			if(response.getBeneficioList().size() == 0){
+				response.setMensaje("No encuentra la lista de beneficios.");
 			}
 			else{
-				response.setMensaje("Puntos de acopio encontrados.");
+				response.setMensaje("Beneficios encontrados.");
 			}
 			
 		} catch (Exception e) {
@@ -66,4 +67,5 @@ public class DonaAcopioController {
 		}
 		return response;
 	}
+
 }

@@ -1,33 +1,35 @@
 package pe.com.tintegro.sigs.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.apache.log4j.Logger;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import pe.com.tintegro.sigs.constants.ResponseEstado;
+import pe.com.tintegro.sigs.dto.request.ObtenerDonadosRequest;
 import pe.com.tintegro.sigs.dto.request.ObtenerPuntosAcopioRequest;
+import pe.com.tintegro.sigs.dto.response.ObtenerDonadosResponse;
 import pe.com.tintegro.sigs.dto.response.ObtenerPuntosAcopioResponse;
 import pe.com.tintegro.sigs.helpers.ResponseHelper;
 import pe.com.tintegro.sigs.properties.APIProperties;
-import pe.com.tintegro.sigs.service.DonaAcopioService;
+import pe.com.tintegro.sigs.service.DonadosService;
 
 @RestController
-@RequestMapping("/donaAcopio")
-@Api(value = "DonaAcopio")
+@RequestMapping("/donados")
+@Api(value = "Donados")
 @CrossOrigin(origins="*")
-public class DonaAcopioController {
-
-	private static final Logger LOG = Logger.getLogger(DonaAcopioController.class);
+public class DonadosController {
+	
+private static final Logger LOG = Logger.getLogger(DonadosController.class);
 	
 	@Autowired
 	private HttpServletRequest servletRequest;
@@ -36,28 +38,27 @@ public class DonaAcopioController {
 	private APIProperties apiProperties;
 	
 	@Autowired
-	private DonaAcopioService donaAcopioService;
+	private DonadosService donadosService;
 	
-	
-	@RequestMapping(value="/obtener-puntos-acopio",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/obtener-donados",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ApiOperation(value = "Obtener dona acopio", notes = "Obtiene dona acopio", response = ObtenerPuntosAcopioResponse.class)
-	public ObtenerPuntosAcopioResponse obtenerDonaAcopio() {
-		ObtenerPuntosAcopioRequest request = new ObtenerPuntosAcopioRequest();
-		ObtenerPuntosAcopioResponse response = new ObtenerPuntosAcopioResponse();
+	@ApiOperation(value = "Obtener donados", notes = "Obtiene todos los donados", response = ObtenerDonadosResponse.class)
+	public ObtenerDonadosResponse obtenerDonados() {
+		ObtenerDonadosRequest request = new ObtenerDonadosRequest();
+		ObtenerDonadosResponse response = new ObtenerDonadosResponse();
 	
 		try {
-			response = donaAcopioService.obtenerPuntosAcopio(request);
+			response = donadosService.obtenerDonados(request);
 			response.setEstado(ResponseEstado.OK);
-			if(response.getDonaAcopioList().size() == 0){
-				response.setMensaje("No encuentra la lista de puntos de acopio.");
+			if(response.getDonadosList().size() == 0){
+				response.setMensaje("No encuentra la lista de donados.");
 			}
 			else{
-				response.setMensaje("Puntos de acopio encontrados.");
+				response.setMensaje("Puntos de donados encontrados.");
 			}
 			
 		} catch (Exception e) {
-			String mensajeError = "Ocurrió un error al obtener los puntos de acopio.";
+			String mensajeError = "Ocurrió un error al obtener los donados.";
 			String codigoError = ResponseHelper.obtenerCodigoErrorPorFecha(apiProperties.getNombre());
 			response.setEstado(ResponseEstado.ERROR_APLICACION);
 			response.setCodigoError(codigoError);

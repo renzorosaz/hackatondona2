@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="pe.com.tintegro.sigs.mapper.OrganizacionMapper">
+  
+	
+	<resultMap type="pe.com.tintegro.sigs.dto.response.InicioSesionOrganizacionResponse" id="confirmacionNDResultMap">
+		<result property="idOrganizacion" column="id_organizacion"/>
+		<association property="confirmacion" javaType="pe.com.tintegro.sigs.entidad.general.Confirmacion">
+			<result property="id" column="id_result" />
+			<result property="mensaje" column="mensaje" />
+		</association>	
+	</resultMap>
+	
+	<select id="inicioSesionOrganizacion" resultMap="confirmacionNDResultMap">
+		select * from "Dona2".fn_mw_inicio_sesion_dona2_organizacion(#{jsonOrganizacion});
+	</select>
+	
+
+	
+	
+ </mapper> 

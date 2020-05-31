@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="pe.com.tintegro.sigs.mapper.BeneficioMapper">
+	
+	<resultMap type="pe.com.tintegro.sigs.entidad.Beneficio" id="beneficioResultMap">
+		<result property="idBeneficio" column="id_beneficio" />
+		<result property="nombre" column="nombre" />
+		<result property="oferta" column="oferta" />
+		<result property="descripcion" column="descripcion" />
+		<result property="nota" column="nota" />
+		<result property="vencimiento" column="vencimiento" />
+		<result property="fotoCuadrado" column="foto_cuadrado" />
+		<result property="fotoRectangular" column="foto_rectangular" />
+		<result property="puntos" column="puntos" />
+		<result property="habilitado" column="habilitado" />
+	</resultMap>
+
+	<select id="obtenerBeneficio" resultMap="beneficioResultMap">
+		SELECT * from "Dona2".fn_mw_select_tb_beneficio();
+	</select>
+
+</mapper>
+

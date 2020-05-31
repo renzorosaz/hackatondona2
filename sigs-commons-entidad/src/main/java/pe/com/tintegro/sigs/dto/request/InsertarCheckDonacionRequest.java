@@ -24,7 +24,7 @@ public class InsertarCheckDonacionRequest {
 			String b = a.replaceAll(Pattern.quote("\"["), Matcher.quoteReplacement("["));
 			String c = b.replaceAll(Pattern.quote("]\""), Matcher.quoteReplacement("]"));
 			setJsonCheckDonacion(c);
-			System.out.println("Producto:->" + c);
+			System.out.println("aea:->" + c);
 		} catch (Exception e) {
 
 		}

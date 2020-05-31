@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import pe.com.tintegro.sigs.constants.ResponseEstado;
-import pe.com.tintegro.sigs.dto.request.InsertarCheckDonacionRequest;
-import pe.com.tintegro.sigs.dto.response.InsertarCheckDonacionResponse;
+import pe.com.tintegro.sigs.dto.request.InsertarDonacionEntregaRequest;
+import pe.com.tintegro.sigs.dto.response.InsertarDonacionEntregaResponse;
 import pe.com.tintegro.sigs.helpers.ResponseHelper;
 import pe.com.tintegro.sigs.properties.APIProperties;
-import pe.com.tintegro.sigs.service.CheckDonacionService;
+import pe.com.tintegro.sigs.service.DonacionEntregaService;
 
 @RestController
-@RequestMapping("/checkDonacion")
-@Api(value = "CheckDonacion")
+@RequestMapping("/donacionEntrega")
+@Api(value = "DonacionEntrega")
 @CrossOrigin(origins="*")
-public class CheckDonacionController {
-
-private static final Logger LOG = Logger.getLogger(CheckDonacionController.class);
+public class DonacionEntregaController {
+	
+private static final Logger LOG = Logger.getLogger(DonacionEntregaController.class);
 	
 	@Autowired
 	private HttpServletRequest servletRequest;
@@ -37,16 +37,16 @@ private static final Logger LOG = Logger.getLogger(CheckDonacionController.class
 	private APIProperties apiProperties;
 	
 	@Autowired
-	private CheckDonacionService checkDonacionService;
+	private DonacionEntregaService donacionEntregaService;
 	
-	@RequestMapping(value = "/insertar-check-donacion", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/insertar-donacion-entrega", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ApiOperation(value = "Inserta check donacion", notes = "Inserta check donacion", response = InsertarCheckDonacionResponse.class)
-	public InsertarCheckDonacionResponse insertCheckDonacion(@RequestBody InsertarCheckDonacionRequest request){
-		InsertarCheckDonacionResponse response = new InsertarCheckDonacionResponse();
+	@ApiOperation(value = "Inserta donacion entrega", notes = "Inserta donacion entrega", response = InsertarDonacionEntregaResponse.class)
+	public InsertarDonacionEntregaResponse insertDonacionEntrega(@RequestBody InsertarDonacionEntregaRequest request){
+		InsertarDonacionEntregaResponse response = new InsertarDonacionEntregaResponse();
 		
 		try {
-			response = checkDonacionService.insertarCheckDonacion(request);
+			response = donacionEntregaService.insertarDonacionEntrega(request);
 			
 			System.out.println(response.getEstado());
 			response.setMensaje(response.getConfirmacion().getMensaje());
@@ -61,4 +61,5 @@ private static final Logger LOG = Logger.getLogger(CheckDonacionController.class
 		}
 		return response;
 	}
+
 }

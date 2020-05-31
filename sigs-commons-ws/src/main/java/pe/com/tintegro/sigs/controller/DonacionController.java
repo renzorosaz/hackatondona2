@@ -16,19 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import pe.com.tintegro.sigs.constants.ResponseEstado;
-import pe.com.tintegro.sigs.dto.request.InsertarCheckDonacionRequest;
-import pe.com.tintegro.sigs.dto.response.InsertarCheckDonacionResponse;
+import pe.com.tintegro.sigs.dto.request.InsertDonacionRequest;
+import pe.com.tintegro.sigs.dto.response.InsertDonacionResponse;
 import pe.com.tintegro.sigs.helpers.ResponseHelper;
 import pe.com.tintegro.sigs.properties.APIProperties;
-import pe.com.tintegro.sigs.service.CheckDonacionService;
+import pe.com.tintegro.sigs.service.DonacionService;
+
 
 @RestController
-@RequestMapping("/checkDonacion")
-@Api(value = "CheckDonacion")
+@RequestMapping("/donacion")
+@Api(value = "Donacion")
 @CrossOrigin(origins="*")
-public class CheckDonacionController {
+public class DonacionController {
 
-private static final Logger LOG = Logger.getLogger(CheckDonacionController.class);
+private static final Logger LOG = Logger.getLogger(DonacionController.class);
 	
 	@Autowired
 	private HttpServletRequest servletRequest;
@@ -37,16 +38,16 @@ private static final Logger LOG = Logger.getLogger(CheckDonacionController.class
 	private APIProperties apiProperties;
 	
 	@Autowired
-	private CheckDonacionService checkDonacionService;
+	private DonacionService donacionService;
 	
-	@RequestMapping(value = "/insertar-check-donacion", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/insertar-donacion", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ApiOperation(value = "Inserta check donacion", notes = "Inserta check donacion", response = InsertarCheckDonacionResponse.class)
-	public InsertarCheckDonacionResponse insertCheckDonacion(@RequestBody InsertarCheckDonacionRequest request){
-		InsertarCheckDonacionResponse response = new InsertarCheckDonacionResponse();
+	@ApiOperation(value = "Inserta donacion", notes = "Inserta donacion", response = InsertDonacionResponse.class)
+	public InsertDonacionResponse insertCheckDonacion(@RequestBody InsertDonacionRequest request){
+		InsertDonacionResponse response = new InsertDonacionResponse();
 		
 		try {
-			response = checkDonacionService.insertarCheckDonacion(request);
+			response = donacionService.insertDonacion(request);
 			
 			System.out.println(response.getEstado());
 			response.setMensaje(response.getConfirmacion().getMensaje());

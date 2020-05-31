@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <mapper namespace="pe.com.tintegro.sigs.mapper.DonacionEntregaMapper">
+  
+  	<resultMap type="pe.com.tintegro.sigs.entidad.general.Confirmacion" id="confirmacionResultMap">
+		<result property="id" column="id_result" />
+		<result property="mensaje" column="no_respuesta" />
+	</resultMap>	
+	
+ 	<select id="insertDonacionEntrega" resultMap="confirmacionResultMap">
+		select * from "Dona2".fn_mw_insert_entrega_donacion(#{jsonDonacionEntrega});
+	</select>
+	
+ </mapper> 
