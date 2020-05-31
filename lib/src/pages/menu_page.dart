@@ -82,7 +82,7 @@ class MenuPage extends StatelessWidget {
     return SafeArea(
           child: Container(
           padding: EdgeInsets.all(20.0),
-          child: Column(
+          child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('! Anímate a Donar !',style: TextStyle(color:Colors.white,fontSize:30.0,fontWeight: FontWeight.bold),),
@@ -98,10 +98,10 @@ class MenuPage extends StatelessWidget {
 
     return new Theme(
       data: Theme.of(context).copyWith(
-         canvasColor: Color.fromRGBO(55, 57, 84, 1.0) ,
+         canvasColor: Color.fromRGBO(91, 236, 236, 1.0) ,
          primaryColor: Colors.pinkAccent,
          textTheme: Theme.of(context).textTheme.copyWith(
-           caption:TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0))
+           caption:TextStyle(color: Color.fromRGBO(91, 236, 236, 1.0))
          )
       ),
       child: BottomNavigationBar(

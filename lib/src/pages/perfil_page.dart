@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -14,13 +13,13 @@ class PerfilPage extends StatelessWidget {
       body: Stack(
         children: <Widget>[ 
              SingleChildScrollView(
-            child: Column(              
+            child: Column(
               children: <Widget>[
                 Column(
                   children: <Widget>[
                     _infoPerfil(context),
                      _infoDetalle(context),
-                    _infoMedallas(context) 
+                    _infoMedallas(context)
                   ],
                 ),
               ],
@@ -37,27 +36,27 @@ class PerfilPage extends StatelessWidget {
  
 
   Widget _infoPerfil(BuildContext context){
-  
+
     return SafeArea(
         child:  Container(
          padding: EdgeInsets.all(15.0),
-        margin: EdgeInsets.symmetric(horizontal: 15.0,vertical: 20.0),      
-      
-          child: Column(       
+        margin: EdgeInsets.symmetric(horizontal: 15.0,vertical: 20.0),
+
+          child: Column(
         children: <Widget>[
-          Row(            
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,            
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Column(       
-                crossAxisAlignment: CrossAxisAlignment.start,         
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Image.asset('assets/dona.jpg', height: 100.0),                  
+                  Image.asset('assets/dona.jpg', height: 100.0),
                 ],
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
-                          
+
                     children: <Widget>[
                     Text('Robiño Poliño',style: TextStyle(color:Colors.black,fontSize:15.0,fontWeight: FontWeight.bold),),   
                     Divider(), 
@@ -249,5 +248,4 @@ class PerfilPage extends StatelessWidget {
     );
 
   }
-
 }
