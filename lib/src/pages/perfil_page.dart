@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:hackaton/src/Model/persona_model.dart';
+import 'package:hackaton/src/Provider/persona_provider.dart';
 
 
 class PerfilPage extends StatelessWidget {
@@ -7,6 +9,8 @@ class PerfilPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
+     PersonaClass persona = new PersonaClass();
+
         return Scaffold(
       appBar: AppBar(
         title: Text('PERFIL'),
@@ -19,7 +23,7 @@ class PerfilPage extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    _infoPerfil(context),
+                    _infoPerfil(persona,context),
                      _infoDetalle(context),
                     _infoMedallas(context)
                   ],
@@ -37,7 +41,7 @@ class PerfilPage extends StatelessWidget {
 
  
 
-  Widget _infoPerfil(BuildContext context){
+  Widget _infoPerfil(PersonaClass persona,BuildContext context){
 
     return SafeArea(
         child:  Container(
@@ -60,7 +64,8 @@ class PerfilPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
 
                     children: <Widget>[
-                    Text('Robiño Poliño',style: TextStyle(color:Colors.black,fontSize:15.0,fontWeight: FontWeight.bold),),   
+                     Text('${persona.apellidoPaterno} - ${persona.apellidoMaterno}'),
+                    Text('Anto',style: TextStyle(color:Colors.black,fontSize:15.0,fontWeight: FontWeight.bold),),   
                     Divider(), 
                    Text('200 Donacoins',style: TextStyle(color:Colors.lightBlue[300],fontSize:13.0,fontWeight: FontWeight.w600),),
                    Text('Código: sehi3939 ',style: TextStyle(color:Colors.black,fontSize:13.0,fontWeight: FontWeight.w600),),

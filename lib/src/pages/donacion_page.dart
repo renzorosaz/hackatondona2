@@ -49,7 +49,7 @@ class _DonacionPageState extends State<DonacionPage> {
               children: <Widget>[   
                 _crearCodigoD(),
                 _crearDescripcion(),                
-                _mostrarFoto(),
+                /* _mostrarFoto(), */
                 /*_mostrarPuntos(),
                 _crearBoton() */
               ],
